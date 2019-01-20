@@ -9,37 +9,37 @@ FROM node:stretch
 # include build tools for native compilation of npm packages
 # FROM node:8-slim
 
-MAINTAINER CROWDCODE GmbH & Co. KG "development@crowdcode.io"
+LABEL maintainer="development@crowdcode.io" \
+      description="Simple vue-cli docker container"
 
-ARG VUE_CLI_VERSION=2.9.6
-ARG USER_HOME_DIR="/tmp"
-ARG WORKSPACE_DIR="/workspace"
+ARG VUE_CLI_VERSION=3.3.0 
+ENV VUE_CLI_VERSION ${VUE_CLI_VERSION}
 ARG USER_ID=1000
+ARG USER_HOME_DIR="/build"
+ARG WORKSPACE_DIR="/workspace"
 
-ENV NPM_CONFIG_LOGLEVEL warn
+ENV NPM_CONFIG_LOGLEVEL info
+ENV HOME "$USER_HOME_DIR"
 
 RUN apt-get update \
    && apt-get install -qqy --no-install-recommends dumb-init \
    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# npm 5 uses different userid when installing packages, as workaround su to node wenn installing
-## see https://github.com/npm/npm/issues/16766
-
 RUN set -xe \
-    && curl -sL https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64 > /usr/bin/dumb-init \
-    && chmod +x /usr/bin/dumb-init \
     && mkdir -p $USER_HOME_DIR \
     && chown $USER_ID $USER_HOME_DIR \
     && chmod a+rw $USER_HOME_DIR \
     && chown -R node /usr/local/lib /usr/local/include /usr/local/share /usr/local/bin \
-    && (cd "$USER_HOME_DIR"; su node -c "npm install -gnpm i -g @vue/cli; npm install -g yarn; chmod +x /usr/local/bin/yarn; npm cache clean --force")
+    &&  (cd "$USER_HOME_DIR"; su node -c "npm install -g @vue/cli@${VUE_CLI_VERSION}; npm install -g yarn; chmod +x /usr/local/bin/yarn; npm cache clean --force")
+
 
 # not declared to avoid anonymous volume leak
 # VOLUME "$USER_HOME_DIR/.cache/yarn"
 # VOLUME "$APP_DIR/"
 WORKDIR $WORKSPACE_DIR
-EXPOSE 4200
 
+EXPOSE 8080
+ 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
-USER $USER_ID
+USER ${USER_ID}
