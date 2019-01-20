@@ -26,7 +26,7 @@ RUN apt-get update \
    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN set -xe \
-    && mkdir -p $USER_HOME_DIR \
+    && mkdir -p /$USER_HOME_DIR \
     && chown $USER_ID $USER_HOME_DIR \
     && chmod a+rw $USER_HOME_DIR \
     && chown -R node /usr/local/lib /usr/local/include /usr/local/share /usr/local/bin \
