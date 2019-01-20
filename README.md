@@ -35,4 +35,4 @@ docker run -u $(id -u) --rm -p 4200:4200 -v /etc/passwd:/etc/passwd -v "$PWD":/a
 
 # Credits
 
-- This image is inspired by [docker-ng-cli](https://github.com/trion-development/docker-ng-cli) by [everflux]()
+- This image is inspired by [docker-ng-cli](https://github.com/trion-development/docker-ng-cli) by [everflux](https://github.com/everflux)
