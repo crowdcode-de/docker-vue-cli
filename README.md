@@ -16,7 +16,7 @@ docker run -it --rm -p 8080:8080 -v "$PWD":/workspace crowdcode/vue-cli npm run 
 
 Or to use VUE CLI UI
 ```
-docker run -it -u ${id -u} --rm -p 8080:8080 -v "$PWD":/workspace crowdcode/vue-cli vue ui -host 0.0.0.0
+docker run -it -u $(id -u) --rm -p 8000:8000 -v "$PWD":/workspace crowdcode/vue-cli vue ui --host 0.0.0.0
 ```
 
 
@@ -24,7 +24,7 @@ To run the Vue CLI development server from docker you need to map the port and i
 For example use
 ```
 cd vuedemo
-docker run -u $(id -u) --rm -p 4200:4200 -v "$PWD":/workspace crowdcode/vue-cli vue serve -host 0.0.0.0
+docker run -u $(id -u) --rm -p 4200:4200 -v "$PWD":/workspace crowdcode/vue-cli vue serve --host 0.0.0.0
 ```
 
 If you want to clone additional git repositories, f.e. from package.json, and you run with a different user than uid 1000 you need to mount the passwd since git requires to resolve the uid.
