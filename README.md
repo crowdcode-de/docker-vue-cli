@@ -16,7 +16,7 @@ docker run -it --rm -p 8080:8080 -v "$PWD":/workspace crowdcode/vue-cli npm run 
 
 Or to use VUE CLI UI
 ```
-docker run -it -u ${id -u} --rm -p 8080:8080 -v "$PWD":/workspace crowdcode/vue-cli vue ui
+docker run -it -u ${id -u} --rm -p 8080:8080 -v "$PWD":/workspace crowdcode/vue-cli vue ui -host 0.0.0.0
 ```
 
 
