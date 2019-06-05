@@ -4,7 +4,7 @@ Docker image for [VUE CLI](https://cli.vuejs.org/) to use as build container.
 
 Image on dockerhub: https://hub.docker.com/r/crowdcode/vue-cli/
 
-Currently, this image uses node v11.7.0 (npm 6.5.0), vue-cli 3.3.0 and Debian stretch as base distribution.
+Currently, this image uses node v12.4.0 (npm 6.9.0), vue-cli 3.8.0 and Debian stretch as base distribution.
 
 ## Example Usage
 
