@@ -30,7 +30,7 @@ RUN set -xe \
     && chown $USER_ID $USER_HOME_DIR \
     && chmod a+rw $USER_HOME_DIR \
     && chown -R node /usr/local/lib /usr/local/include /usr/local/share /usr/local/bin \
-    &&  (cd "$USER_HOME_DIR"; su node -c "npm install -g @vue/cli@${VUE_CLI_VERSION}; npm install -g yarn; chmod +x /usr/local/bin/yarn; npm cache clean --force")
+    &&  (cd "$USER_HOME_DIR"; su node -c "npm install -g @vue/cli@${VUE_CLI_VERSION}; npm install -g yarn; yarn global add @vue/cli-service-global; chmod +x /usr/local/bin/yarn; npm cache clean --force")
 
 
 # not declared to avoid anonymous volume leak
@@ -38,7 +38,7 @@ RUN set -xe \
 # VOLUME "$APP_DIR/"
 WORKDIR $WORKSPACE_DIR
 
-EXPOSE 8080
+EXPOSE 8000
  
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
