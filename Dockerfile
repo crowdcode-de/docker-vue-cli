@@ -3,7 +3,7 @@
 # or specify vue-cli version
 # build --build-arg VUE_CLI_VERSION= .
 
-FROM node:stretch
+FROM node:lts-bullseye-slim
 
 # alternative to reduce size instead of alpine, but does not
 # include build tools for native compilation of npm packages
@@ -12,7 +12,7 @@ FROM node:stretch
 LABEL maintainer="development@crowdcode.io" \
       description="Simple vue-cli docker container"
 
-ARG VUE_CLI_VERSION=3.3.0 
+ARG VUE_CLI_VERSION=3.8.0
 ENV VUE_CLI_VERSION ${VUE_CLI_VERSION}
 ARG USER_ID=1000
 ARG USER_HOME_DIR="/build"
